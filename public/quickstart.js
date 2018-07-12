@@ -40,6 +40,30 @@ $.getJSON('/token', function (data) {
     log('Leaving room...');
     activeRoom.disconnect();
   };
+
+  // Bind button to mute audio
+  document.getElementById('button-mute').onclick = function () {
+    log('muted audio...');
+    // console.log(activeRoom);
+    // console.log(previewMedia);
+    if (previewMedia) {
+      previewMedia.mute();
+      console.log(previewMedia);
+    }else {
+      Twilio.Video.getUserMedia().then(function(media){
+        console.log(media);
+        // media.stop()
+        console.log(media);
+        console.log(media.getAudioTracks()[0]);
+        console.log(media.getAudioTracks()[0].stop());
+      });
+
+    }
+    // Twilio.Video.getUserMedia().then(function(media){
+    //   console.log(media.getAudioTracks());
+    // })
+  };
+
 });
 
 // Successfully connected!
